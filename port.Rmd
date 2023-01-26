@@ -1,0 +1,34 @@
+```{r}
+library(tidyverse)
+library(dplyr)
+library(haven)
+Mother_and_teen_data <- read_sav("Mother_and_teen_data.sav")
+View(Mother_and_teen_data)
+Mother_and_teen_data$Race3 <- as.factor(Mother_and_teen_data$Race3)
+select(Mother_and_teen_data, PSE, CD_1, CD_2, CD_3, PAPWARM, PAPmoni, PAPsolic, PAPrule, Race3)
+ggplot(Mother_and_teen_data, aes(x=PSE, y=CD_1, fill = Race3)) +  geom_smooth(size=1, alpha=0.4) +
+ geom_point(aes(color=Race3))+
+  labs(title="PSE and adolescents' disobeying parents", x="Parental self-efficacy", y="Disobeying parents among adolescents" ) 
+  
+```
+```{r}
+ggplot(Mother_and_teen_data, aes(x=PSE, y=CD_2, fill = Race3)) +  geom_smooth(size=1, alpha=0.4) +
+ geom_point(aes(color=Race3))+
+  labs(title="PSE and adolescents' school misconduct", x="Parental self-efficacy", y="school misconduct among adolescents" ) 
+  
+```
+
+```{r}
+ggplot(Mother_and_teen_data, aes(x=PSE, y=CD_3, fill = Race3)) +  geom_smooth(size=1, alpha=0.4) +
+ geom_point(aes(color=Race3))+
+  labs(title="PSE and adolescents' substance use", x="Parental self-efficacy", y="substance use among adolescents" ) 
+  
+```
+
+```{r}
+ggplot(Mother_and_teen_data, aes(x=PSE, y=PAPWARM, fill = Race3)) +  geom_smooth(size=1, alpha=0.4) +
+ geom_point(aes(color=Race3))+
+  labs(title="PSE and adolescents' parental warmth", x="Parental self-efficacy", y="parental warmth" ) 
+```
+
+
