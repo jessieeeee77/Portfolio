@@ -3,10 +3,7 @@ Goal is to do SEM of first year project in Rstudio
 library(tidyverse)
 library(dplyr)
 library(haven)
-install.packages("lavaan")
-install.packages("readxl")
-
-Mother_and_teen_data <- readfit_sav("Mother_and_teen_data.sav")
+Mother_and_teen_data <- read_sav("Mother_and_teen_data.sav")
 #View(Mother_and_teen_data)
 Mother_and_teen_data$Race3 <- as.factor(Mother_and_teen_data$Race3)
 select(Mother_and_teen_data, PSE, CD_1, CD_2, CD_3, PAPWARM, PAPmoni, PAPsolic, PAPrule, Race3)
@@ -43,10 +40,16 @@ SEM to test the model and its fits
 ```{r} 
 model1<-"AdolD=~CD_1 +CD_2 +CD_3
 EffectP=~PAPmoni+PAPWARM+PAPsolic+PAPrule
-AdolD~EffectP+PSE
 PSE~EffectP
-PSE~AdolD
-EffectP~AdolD"
+AdolD~EffectP + PSE"
+#residual correlations
+PAPmoni~~PAPsoli
+PAPmoni~~PAPrule
+PAPWARM~~PAPsoli
+
+CD_1~~CD_2
+CD_1~~CD_3
+CD_2~~CD_3
 ```
 the model fits.
 ```{r} 
